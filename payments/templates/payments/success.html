@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Payment Successful!</h2>
+<p>You have enrolled in {{ payment.course.title }}.</p>
+<a href="{% url 'course_detail' slug=payment.course.slug %}">Go to Course</a>
+{% endblock %}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}LearnCloud{% endblock %}</title>
+  <link href="{% static 'css/output.css' %}" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <nav class="bg-primary text-white p-4 flex justify-between">
+    <a href="{% url 'courses:homepage' %}" class="font-bold text-xl">LearnCloud</a>
+    <div class="space-x-4">
+      <a href="{% url 'courses:course_list' %}" class="hover:text-secondary">Courses</a>
+      <a href="{% url 'accounts:login' %}" class="hover:text-secondary">Login</a>
+      <a href="{% url 'accounts:signup' %}" class="hover:text-secondary">Signup</a>
+    </div>
+  </nav>
+
+  <main class="container mx-auto p-6">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="bg-secondary text-white p-4 text-center">
+    © 2025 LearnCloud — Learn Anywhere, Anytime
+  </footer>
+</body>
+</html>

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ course.title }}</h2>
+<p>{{ course.description }}</p>
+
+{% if is_enrolled %}
+  <p><strong>You are enrolled.</strong></p>
+{% else %}
+  <p><a href="{% url 'enroll' slug=course.slug %}">Enroll now</a></p>
+{% endif %}
+
+<h3>Lessons</h3>
+<ol>
+  {% for lesson in lessons %}
+    <li>
+      <a href="{% url 'lesson_detail' slug=course.slug order=lesson.order %}">
+        {{ lesson.order }}. {{ lesson.title }}
+      </a>
+      {% if lesson.is_preview %}<em>(Preview)</em>{% endif %}
+    </li>
+  {% endfor %}
+</ol>
+
+<h3>Reviews</h3>
+<ul>
+  {% for review in course.reviews.all %}
+    <li>
+      <strong>{{ review.student.username }}</strong> rated {{ review.rating }}★
+      <p>{{ review.comment }}</p>
+      <small>{{ review.created_at }}</small>
+    </li>
+  {% empty %}
+    <p>No reviews yet.</p>
+  {% endfor %}
+</ul>
+
+{% if is_enrolled %}
+  <p><a href="{% url 'add_review' slug=course.slug %}">Leave a Review</a></p>
+{% endif %}
+{% endblock %}
+

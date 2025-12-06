@@ -1,0 +1,15 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ course.title }} — {{ lesson.title }}</h2>
+<div>
+  {{ lesson.content|linebreaks }}
+</div>
+
+{% if is_enrolled %}
+  <form method="post" action="{% url 'mark_completed' slug=course.slug order=lesson.order %}">
+    {% csrf_token %}
+    <button type="submit">Mark as Completed</button>
+  </form>
+{% endif %}
+{% endblock %}
