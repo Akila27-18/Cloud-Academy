@@ -2,7 +2,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'replace-with-a-secure-key'
+SECRET_KEY = 'django-insecure-test-key-1234567890abcdefghijklmnopqrstuvwxyz'
 DEBUG = True
 ALLOWED_HOSTS = ['*']
 
@@ -76,8 +76,8 @@ LOGOUT_REDIRECT_URL = 'courses:course_list'
 
 LOGIN_URL = 'accounts:login'
 
-RAZORPAY_KEY_ID = "your_test_key"
-RAZORPAY_KEY_SECRET = "your_test_secret"
+RAZORPAY_KEY_ID= 'rzp_test_1234567890'
+RAZORPAY_KEY_SECRET= 'test_secret_abcdefghijklmnopqrstuvwxyz'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
