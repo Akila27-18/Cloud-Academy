@@ -150,9 +150,9 @@ def enroll(request, slug):
         messages.info(request, 'You are already enrolled.')
     return redirect('course_detail', slug=slug)
 
-def lesson_detail(request, slug, order):
+def lesson_detail(request, slug, pk):
     course = get_object_or_404(Course, slug=slug, is_published=True)
-    lesson = get_object_or_404(Lesson, course=course, order=order)
+    lesson = get_object_or_404(Lesson, pk=pk, course=course)
     is_enrolled = request.user.is_authenticated and Enrollment.objects.filter(student=request.user, course=course).exists()
     if not (lesson.is_preview or is_enrolled):
         messages.warning(request, 'Please enroll to access this lesson.')

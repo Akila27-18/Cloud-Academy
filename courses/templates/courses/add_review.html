@@ -1,8 +1,28 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
-<h2>Review {{ course.title }}</h2>
-<form method="post">{% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Submit Review</button>
-</form>
+<section class="container py-5">
+  <!-- Heading -->
+  <h2 class="h3 fw-bold text-primary mb-4">
+    Review {{ course.title }}
+  </h2>
+
+  <!-- Review Form Card -->
+  <div class="card shadow-lg mx-auto" style="max-width: 32rem;">
+    <div class="card-body p-4">
+      <form method="post">
+        {% csrf_token %}
+
+        <!-- Render form fields -->
+        {{ form.as_p }}
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-warning w-100 fw-semibold mt-3">
+          Submit Review
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
 {% endblock %}

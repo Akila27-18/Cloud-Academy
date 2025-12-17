@@ -1,26 +1,76 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
-<section class="text-center py-12">
-  <h1 class="text-5xl font-bold text-primary">Welcome to LearnCloud</h1>
-  <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-    Your gateway to mastering Cloud, DevOps, Programming, Data Science, and Design. Learn anywhere, anytime.
+
+<!-- Hero -->
+<section class="text-center py-5">
+  <h1 class="display-4 fw-bold text-primary">Welcome to LearnCloud</h1>
+  <p class="mt-3 fs-5 text-muted mx-auto" style="max-width: 40rem;">
+    Your gateway to mastering Cloud, DevOps, Programming, Data Science, and Design.
   </p>
 </section>
 
-<section class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-  {% for course in featured_courses %}
-  <div class="bg-white shadow-lg rounded-lg overflow-hidden hover:scale-105 transition">
-    <img src="https://source.unsplash.com/600x400/?technology,{{ course.category }}" 
-         alt="{{ course.title }}" class="w-full h-48 object-cover">
-    <div class="p-6">
-      <h2 class="text-2xl font-semibold text-primary">{{ course.title }}</h2>
-      <p class="mt-2 text-gray-700">{{ course.description|truncatechars:150 }}</p>
-      <a href="{% url 'courses:course_detail' slug=course.slug %}" 
-         class="mt-4 inline-block bg-secondary text-white px-4 py-2 rounded hover:bg-primary">
-         View Course
-      </a>
-    </div>
+<!-- Featured Courses -->
+<section class="container py-5">
+  <h2 class="h3 fw-bold text-primary mb-4 text-center">Featured Courses</h2>
+  <div class="row g-4">
+    {% for course in featured_courses %}
+      <div class="col-md-6 col-lg-4">
+        <div class="card shadow-lg h-100 border-0">
+        <img src="https://loremflickr.com/600/400/{{ course.category|slugify }}"
+               alt="{{ course.title }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+          <div class="card-body">
+            <h3 class="h5 fw-semibold text-primary">{{ course.title }}</h3>
+            <p class="text-muted mt-2">{{ course.description|truncatechars:120 }}</p>
+            <a href="{% url 'courses:course_detail' slug=course.slug %}" 
+               class="btn btn-warning fw-semibold mt-3">
+              View Course
+            </a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-secondary text-center">No featured courses available right now.</p>
+    {% endfor %}
   </div>
-  {% endfor %}
 </section>
+
+<!-- Top Rated Courses -->
+<section class="container py-5">
+  <h2 class="h3 fw-bold text-primary mb-4 text-center">Top Rated Courses</h2>
+  <div class="row g-4">
+    {% for course in top_courses %}
+      <div class="col-md-6 col-lg-4">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <h3 class="h5 fw-semibold text-primary">{{ course.title }}</h3>
+            <p class="text-muted mt-2">{{ course.description|truncatechars:120 }}</p>
+            <p class="small text-secondary mt-1">Avg Rating: {{ course.avg_rating|default:"N/A" }}</p>
+            <a href="{% url 'courses:course_detail' slug=course.slug %}" 
+               class="btn btn-warning fw-semibold mt-3">
+              View Course
+            </a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-secondary text-center">No top-rated courses yet.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Categories -->
+<section class="container py-5">
+  <h2 class="h3 fw-bold text-primary mb-4 text-center">Browse by Category</h2>
+  <div class="d-flex flex-wrap justify-content-center gap-2">
+    {% for key, label in categories %}
+      <a href="{% url 'courses:course_list' %}?category={{ key }}" 
+         class="btn btn-warning fw-semibold">
+        {{ label }}
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
 {% endblock %}

@@ -1,10 +1,33 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
-<h2>Certificate of Completion</h2>
-<p>This certifies that <strong>{{ certificate.student.username }}</strong></p>
-<p>has successfully completed the course <strong>{{ certificate.course.title }}</strong></p>
-<p>Issued on: {{ certificate.issued_at }}</p>
-<p>Certificate ID: {{ certificate.certificate_id }}</p>
-<hr>
-<button onclick="window.print()">Download / Print</button>
+<section class="container py-5 d-flex justify-content-center">
+  <div class="card shadow-lg border border-4 border-primary text-center w-100" style="max-width: 40rem;">
+    <div class="card-body p-5">
+      <!-- Title -->
+      <h2 class="h2 fw-bold text-primary mb-4">Certificate of Completion</h2>
+
+      <!-- Student + Course -->
+      <p class="fs-5 text-muted mb-3">
+        This certifies that <span class="fw-semibold text-warning">{{ certificate.student.username }}</span>
+      </p>
+      <p class="fs-5 text-muted mb-3">
+        has successfully completed the course <span class="fw-semibold text-warning">{{ certificate.course.title }}</span>
+      </p>
+
+      <!-- Issued Date + ID -->
+      <p class="mt-4 text-secondary">Issued on: {{ certificate.issued_at }}</p>
+      <p class="text-secondary">Certificate ID: {{ certificate.certificate_id }}</p>
+
+      <!-- Decorative Divider -->
+      <hr class="my-4 border border-warning">
+
+      <!-- Print Button -->
+      <button onclick="window.print()" class="btn btn-warning fw-semibold">
+        Download / Print
+      </button>
+    </div>
+  </div>
+</section>
 {% endblock %}

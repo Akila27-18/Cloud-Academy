@@ -1,23 +1,17 @@
 from django.contrib import admin
-from .models import Course, Lesson, Enrollment
+from .models import Course, Lesson, Enrollment, Review, Certificate, Progress
 
-class LessonInline(admin.TabularInline):
-    model = Lesson
-    extra = 0
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('student', 'course', 'rating', 'created_at')
+    list_filter = ('rating', 'course')
 
-@admin.register(Course)
-class CourseAdmin(admin.ModelAdmin):
-    list_display = ('title', 'instructor', 'is_published', 'created_at')
-    list_filter = ('is_published', 'created_at')
-    prepopulated_fields = {'slug': ('title',)}
-    inlines = [LessonInline]
+@admin.register(Certificate)
+class CertificateAdmin(admin.ModelAdmin):
+    list_display = ('certificate_id', 'student', 'course', 'issued_at')
+    search_fields = ('certificate_id', 'student__username', 'course__title')
 
-@admin.register(Lesson)
-class LessonAdmin(admin.ModelAdmin):
-    list_display = ('course', 'title', 'order', 'is_preview')
-    list_filter = ('course', 'is_preview')
-
-@admin.register(Enrollment)
-class EnrollmentAdmin(admin.ModelAdmin):
-    list_display = ('student', 'course', 'enrolled_at')
-    list_filter = ('course',)
+@admin.register(Progress)
+class ProgressAdmin(admin.ModelAdmin):
+    list_display = ('student', 'lesson', 'completed', 'completed_at')
+    list_filter = ('completed', 'lesson__course')

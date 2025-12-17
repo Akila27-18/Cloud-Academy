@@ -17,7 +17,8 @@ class Course(models.Model):
     description = models.TextField()
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default='programming')
     instructor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='courses')
-    created_at = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(upload_to="courses/", blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     is_published = models.BooleanField(default=True)
     def average_rating(self):
         return self.reviews.aggregate(Avg('rating'))['rating__avg'] or 0
@@ -31,7 +32,7 @@ class Review(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='reviews')
     rating = models.PositiveIntegerField(default=5)  # 1–5 stars
     comment = models.TextField(blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     class Meta:
         unique_together = ('student', 'course')  # one review per student per course

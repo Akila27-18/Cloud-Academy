@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from .forms import SignUpForm, ProfileForm
 from .models import Profile
 
+
 def signup_view(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -21,11 +22,12 @@ def signup_view(request):
                 role=profile_form.cleaned_data['role'],
                 bio=profile_form.cleaned_data['bio']
             )
-            return redirect('login')
+            return redirect('accounts:login')
     else:
         form = SignUpForm()
         profile_form = ProfileForm()
     return render(request, 'accounts/signup.html', {'form': form, 'profile_form': profile_form})
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -33,15 +35,17 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('dashboard')
+            return redirect("accounts:dashboard")
     else:
         form = AuthenticationForm()
     return render(request, 'accounts/login.html', {'form': form})
 
+
 @login_required
-def dashboard_view(request):
+def dashboard(request):
     profile = getattr(request.user, 'profile', None)
     return render(request, 'accounts/dashboard.html', {'profile': profile})
+
 
 @login_required
 def logout_view(request):

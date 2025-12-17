@@ -9,4 +9,7 @@ urlpatterns = [
 
     # Courses app (homepage + all course-related routes)
     path('', include('courses.urls')),
+    
+    # Payments app
+    path('payments/', include('payments.urls')),
 ]

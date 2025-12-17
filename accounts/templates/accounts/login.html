@@ -1,9 +1,31 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
-<h2>Login</h2>
-<form method="post">{% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Login</button>
-</form>
-<p>No account? <a href="{% url 'signup' %}">Sign up</a></p>
+<section class="container py-5 d-flex justify-content-center">
+  <!-- Login Card -->
+  <div class="card shadow-lg w-100" style="max-width: 28rem;">
+    <div class="card-body p-4">
+      <!-- Heading -->
+      <h2 class="h3 fw-bold text-primary mb-4 text-center">Login</h2>
+
+      <!-- Form -->
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-warning w-100 fw-semibold mt-3">
+          Login
+        </button>
+      </form>
+
+      <!-- Signup Link -->
+      <p class="mt-4 text-center text-muted">
+        No account?
+        <a href="{% url 'accounts:signup' %}" class="text-primary fw-semibold">Signup</a>
+      </p>
+    </div>
+  </div>
+</section>
 {% endblock %}

@@ -1,41 +1,57 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
-<h2>{{ course.title }}</h2>
-<p>{{ course.description }}</p>
+<!-- Hero Banner -->
+<section class="bg-primary text-white py-5">
+  <div class="container text-center">
+    <h1 class="h2 fw-bold">{{ course.title }}</h1>
+    <p class="mt-3 fs-5 mx-auto" style="max-width: 40rem;">{{ course.description }}</p>
+    <p class="mt-2 small">Instructor: {{ course.instructor.username }}</p>
+    <a href="{% url 'courses:enroll' slug=course.slug %}" 
+       class="btn btn-warning mt-4 fw-semibold">
+       Enroll Now
+    </a>
+  </div>
+</section>
 
-{% if is_enrolled %}
-  <p><strong>You are enrolled.</strong></p>
-{% else %}
-  <p><a href="{% url 'enroll' slug=course.slug %}">Enroll now</a></p>
-{% endif %}
+<!-- Lessons -->
+<section class="container py-5">
+  <h2 class="h4 fw-semibold text-primary mb-4">Course Lessons</h2>
+  <div class="d-flex flex-column gap-3">
+    {% for lesson in course.lessons.all %}
+    <div class="card shadow-sm">
+      <div class="card-body d-flex justify-content-between align-items-center">
+        <div>
+          <h3 class="h6 fw-bold mb-1">{{ lesson.title }}</h3>
+          {% if lesson.is_preview %}
+            <span class="small text-warning">Preview Available</span>
+          {% endif %}
+        </div>
+        <a href="{% url 'courses:lesson_detail' slug=course.slug pk=lesson.id %}"
+           class="btn btn-primary btn-sm fw-semibold">
+           View
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
 
-<h3>Lessons</h3>
-<ol>
-  {% for lesson in lessons %}
-    <li>
-      <a href="{% url 'lesson_detail' slug=course.slug order=lesson.order %}">
-        {{ lesson.order }}. {{ lesson.title }}
-      </a>
-      {% if lesson.is_preview %}<em>(Preview)</em>{% endif %}
-    </li>
-  {% endfor %}
-</ol>
-
-<h3>Reviews</h3>
-<ul>
-  {% for review in course.reviews.all %}
-    <li>
-      <strong>{{ review.student.username }}</strong> rated {{ review.rating }}★
-      <p>{{ review.comment }}</p>
-      <small>{{ review.created_at }}</small>
-    </li>
-  {% empty %}
-    <p>No reviews yet.</p>
-  {% endfor %}
-</ul>
-
-{% if is_enrolled %}
-  <p><a href="{% url 'add_review' slug=course.slug %}">Leave a Review</a></p>
-{% endif %}
+<!-- Reviews -->
+<section class="bg-light py-5">
+  <div class="container">
+    <h2 class="h4 fw-semibold text-primary mb-4">Student Reviews</h2>
+    {% for review in course.reviews.all %}
+    <div class="card shadow-sm mb-3">
+      <div class="card-body">
+        <p class="text-dark mb-2">{{ review.comment }}</p>
+        <p class="small text-secondary">⭐ {{ review.rating }} by {{ review.student.username }}</p>
+      </div>
+    </div>
+    {% empty %}
+    <p class="text-secondary">No reviews yet. Be the first to review!</p>
+    {% endfor %}
+  </div>
+</section>
 {% endblock %}
-

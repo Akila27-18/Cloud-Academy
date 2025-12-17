@@ -1,15 +1,32 @@
-
 {% extends 'base.html' %}
-{% block content %}
-<h2>{{ course.title }} — {{ lesson.title }}</h2>
-<div>
-  {{ lesson.content|linebreaks }}
-</div>
+{% load static %}
 
-{% if is_enrolled %}
-  <form method="post" action="{% url 'mark_completed' slug=course.slug order=lesson.order %}">
+{% block content %}
+<section class="container py-5">
+  <!-- Lesson Header -->
+  <div class="mb-4 text-center">
+    <h2 class="h3 fw-bold text-primary">
+      {{ course.title }} — {{ lesson.title }}
+    </h2>
+  </div>
+
+  <!-- Lesson Content -->
+  <article class="card shadow-sm mb-4">
+    <div class="card-body">
+      {{ lesson.content|linebreaks }}
+    </div>
+  </article>
+
+  <!-- Completion Form -->
+  {% if is_enrolled %}
+  <form method="post" 
+        action="{% url 'mark_completed' slug=course.slug order=lesson.order %}" 
+        class="text-center mt-4">
     {% csrf_token %}
-    <button type="submit">Mark as Completed</button>
+    <button type="submit" class="btn btn-warning fw-semibold">
+      Mark as Completed
+    </button>
   </form>
-{% endif %}
+  {% endif %}
+</section>
 {% endblock %}

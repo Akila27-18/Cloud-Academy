@@ -1,8 +1,28 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
-<h2>Add Lesson to {{ course.title }}</h2>
-<form method="post">{% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Save Lesson</button>
-</form>
+<section class="container py-5">
+  <!-- Heading -->
+  <h2 class="h3 fw-bold text-primary mb-4">
+    Add Lesson to {{ course.title }}
+  </h2>
+
+  <!-- Form Card -->
+  <div class="card shadow-lg mx-auto" style="max-width: 40rem;">
+    <div class="card-body p-4">
+      <form method="post">
+        {% csrf_token %}
+
+        <!-- Render form fields -->
+        {{ form.as_p }}
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-warning w-100 fw-semibold mt-3">
+          Save Lesson
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
 {% endblock %}
