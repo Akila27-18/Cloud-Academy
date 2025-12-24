@@ -89,7 +89,9 @@ def mark_completed(request, slug, order):
     progress.completed_at = timezone.now()
     progress.save()
     messages.success(request, f'Lesson "{lesson.title}" marked as completed!')
-    return redirect('lesson_detail', slug=slug, order=order)
+
+    # Correct redirect
+    return redirect('courses:lesson_detail', slug=course.slug, pk=lesson.pk)
 
 # Existing views: course_list, course_detail, enroll, lesson_detail
 

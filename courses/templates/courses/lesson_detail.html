@@ -20,7 +20,7 @@
   <!-- Completion Form -->
   {% if is_enrolled %}
   <form method="post" 
-        action="{% url 'mark_completed' slug=course.slug order=lesson.order %}" 
+        action="{% url 'courses:mark_completed' slug=course.slug order=lesson.order %}" 
         class="text-center mt-4">
     {% csrf_token %}
     <button type="submit" class="btn btn-warning fw-semibold">

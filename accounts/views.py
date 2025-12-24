@@ -5,7 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from .forms import SignUpForm, ProfileForm
 from .models import Profile
-
+from courses.models import Course
 
 def signup_view(request):
     if request.method == 'POST':
@@ -41,10 +41,16 @@ def login_view(request):
     return render(request, 'accounts/login.html', {'form': form})
 
 
+from courses.models import Enrollment
+
 @login_required
 def dashboard(request):
     profile = getattr(request.user, 'profile', None)
-    return render(request, 'accounts/dashboard.html', {'profile': profile})
+    enrolled_courses = Course.objects.filter(enrollments__student=request.user)
+    return render(request, 'accounts/dashboard.html', {
+        'profile': profile,
+        'enrolled_courses': enrolled_courses,
+    })
 
 
 @login_required
