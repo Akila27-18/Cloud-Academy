@@ -18,7 +18,7 @@
     {% for course in featured_courses %}
       <div class="col-md-6 col-lg-4">
         <div class="card shadow-lg h-100 border-0">
-          <img src="{{ course.image.url|default:static('images/tech-course.webp') }}"
+          <img src="{% if course.image %}{{ course.image.url }}{% else %}{% static 'images/tech-course.webp' %}{% endif %}"
                alt="{{ course.title }}"
                class="card-img-top"
                style="height: 200px; object-fit: cover;">
@@ -45,7 +45,7 @@
     {% for course in top_courses %}
       <div class="col-md-6 col-lg-4">
         <div class="card shadow-sm h-100">
-          <img src="{{ course.image.url|default:static('images/tech-course.webp') }}"
+          <img src="{% if course.image %}{{ course.image.url }}{% else %}{% static 'images/tech-course.webp' %}{% endif %}"
                alt="{{ course.title }}"
                class="card-img-top"
                style="height: 200px; object-fit: cover;">
