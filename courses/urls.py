@@ -17,6 +17,7 @@ from .views import (
 
 app_name = "courses"
 
+
 urlpatterns = [
     # Homepage
     path("", homepage, name="homepage"),

@@ -12,8 +12,10 @@
     <div class="col-md-6 col-lg-4">
       <div class="card shadow-lg h-100 border-0">
         <!-- Course Image -->
-        <img src="https://source.unsplash.com/600x400/?{{ course.category }}" 
-             alt="{{ course.title }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+<img src="{% static 'images/tech-course.webp' %}"
+     alt="{{ course.title }}"
+     class="card-img-top"
+     style="height: 200px; object-fit: cover;">
 
         <!-- Course Content -->
         <div class="card-body d-flex flex-column">

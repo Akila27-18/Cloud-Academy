@@ -8,10 +8,11 @@
     <h1 class="h2 fw-bold">{{ course.title }}</h1>
     <p class="mt-3 fs-5 mx-auto" style="max-width: 40rem;">{{ course.description }}</p>
     <p class="mt-2 small">Instructor: {{ course.instructor.username }}</p>
-    <a href="{% url 'courses:enroll' slug=course.slug %}" 
-       class="btn btn-warning mt-4 fw-semibold">
-       Enroll Now
-    </a>
+    <a href="{% url 'payments:checkout' course.slug %}"
+   class="btn btn-warning mt-4 fw-semibold">
+   Enroll Now
+</a>
+
   </div>
 </section>
 

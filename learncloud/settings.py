@@ -76,6 +76,8 @@ LOGOUT_REDIRECT_URL = 'courses:course_list'
 
 LOGIN_URL = 'accounts:login'
 
+USE_FAKE_PAYMENT = True
+
 RAZORPAY_KEY_ID= 'rzp_test_1234567890'
 RAZORPAY_KEY_SECRET= 'test_secret_abcdefghijklmnopqrstuvwxyz'
 

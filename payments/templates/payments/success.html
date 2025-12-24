@@ -6,29 +6,39 @@
   <!-- Success Card -->
   <div class="card shadow-lg w-100 text-center" style="max-width: 28rem;">
     <div class="card-body p-4">
+
       <!-- Success Icon -->
       <div class="d-flex justify-content-center mb-4">
-        <div class="bg-success-subtle text-success rounded-circle p-3 d-flex align-items-center justify-content-center">
-          <!-- Bootstrap styled check-circle -->
-          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
-            <path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm3.97-8.03a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L4.03 9.97a.75.75 0 0 1 1.06-1.06L8 11.88l3.91-3.91a.75.75 0 0 1 1.06 0z"/>
+        <div class="bg-success-subtle text-success rounded-circle p-3
+                    d-flex align-items-center justify-content-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+               fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm3.97-8.03a.75.75 0 0 1
+                     0 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L4.03 9.97a.75.75
+                     0 0 1 1.06-1.06L8 11.88l3.91-3.91a.75.75 0 0 1 1.06 0z"/>
           </svg>
         </div>
       </div>
 
       <!-- Heading -->
-      <h2 class="h3 fw-bold text-primary mb-3">Payment Successful!</h2>
+      <h2 class="h3 fw-bold text-primary mb-3">
+        Payment Successful!
+      </h2>
 
       <!-- Message -->
       <p class="text-dark mb-4">
-        You have enrolled in <span class="fw-semibold text-warning">{{ payment.course.title }}</span>.
+        You have enrolled in
+        <span class="fw-semibold text-warning">
+          {{ payment.course.title }}
+        </span>.
       </p>
 
       <!-- Action Button -->
-      <a href="{% url 'course_detail' slug=payment.course.slug %}" 
+      <a href="{% url 'courses:course_detail' slug=payment.course.slug %}"
          class="btn btn-warning fw-semibold">
         Go to Course
       </a>
+
     </div>
   </div>
 </section>
